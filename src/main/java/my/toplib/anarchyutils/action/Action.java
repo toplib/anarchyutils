@@ -5,7 +5,9 @@ import org.bukkit.entity.Player;
 public interface Action {
 
     /**
-     * Executes Action
+     * Executes this action for the given player.
+     * Actions that need a player context (message, sound, command)
+     * should check {@code player == null} or rely on setPlayer().
      */
-    public void execute();
+    void execute(Player player);
 }

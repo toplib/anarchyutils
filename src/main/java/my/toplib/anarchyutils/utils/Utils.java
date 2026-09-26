@@ -37,7 +37,7 @@ public class Utils {
     }
 
     public static void checkUpdate(Player p) throws URISyntaxException, IOException, InterruptedException {
-        if(AnarchyUtils.instance.getConfig().getBoolean("checkForUpdates")){
+        if(AnarchyUtils.instance.getConfig().getBoolean("Settings.checkForUpdates", true)){
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI("https://api.github.com/repos/TOPLIB/anarchyutils/releases/latest"))
                     .GET()

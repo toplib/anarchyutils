@@ -43,7 +43,7 @@ public class World {
                 cooldown.remove(player.getUniqueId());
                 player.sendMessage(Utils.color(Messages.get().getString("player_plastDisable")).replaceAll("%player%", player.getName()));
             }
-        }.runTaskLater(AnarchyUtils.instance, AnarchyUtils.instance.getConfig().getInt("Items.Plast.despawn_delay"));
+        }.runTaskLater(AnarchyUtils.instance, AnarchyUtils.itemsConfig.getConfig().getInt("Items.Plast.despawn_delay", 6000));
         return true;
     }
 }
