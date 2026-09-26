@@ -36,7 +36,13 @@ public class Events implements Listener {
             int cdSeconds = AnarchyUtils.itemsConfig.getConfig()
                     .getInt("Items." + id.substring(0, 1).toUpperCase() + id.substring(1) + ".cooldown_seconds", 0);
             if (cdSeconds > 0) {
-                if (Buildings.cooldown.containsKey(pl.getUniqueId())) {
+                long lastUse = Buildings.cooldown.getOrDefault(pl.getUniqueId(), 0L);
+                long elapsedMillis = System.currentTimeMillis() - lastUse;
+                // Cooldown is global per player: while any effect of this player is active,
+                // placing a new one is blocked. Effects live for despawn_delay milliseconds.
+                long maxEffectMillis = Math.max(cdSeconds * 1000L,
+                        AnarchyUtils.itemsConfig.getConfig().getInt("Items.Plast.despawn_delay", 6000));
+                if (Buildings.cooldown.containsKey(pl.getUniqueId()) && elapsedMillis < maxEffectMillis) {
                     pl.sendMessage(Utils.color(my.toplib.anarchyutils.configs.Messages.get()
                             .getString("modules.items.cooldown", "&cPlease wait!")));
                     return;
@@ -48,7 +54,7 @@ public class Events implements Listener {
                     public void run() {
                         Buildings.cooldown.remove(pl.getUniqueId());
                     }
-                }.runTaskLater(AnarchyUtils.instance, cdSeconds * 20L);
+                }.runTaskLater(AnarchyUtils.instance, maxEffectMillis / 50L);
             }
 
             // legacy built-in behaviour for trap/plast (schematic building)
