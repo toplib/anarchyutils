@@ -12,6 +12,7 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -36,7 +37,7 @@ public class Utils {
     }
 
     public static void checkUpdate(Player p) throws URISyntaxException, IOException, InterruptedException {
-        if(AnarchyUtils.instance.getConfig().getBoolean("checkForUpdates")){
+        if(AnarchyUtils.instance.getConfig().getBoolean("Settings.checkForUpdates", true)){
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI("https://api.github.com/repos/TOPLIB/anarchyutils/releases/latest"))
                     .GET()
@@ -61,11 +62,11 @@ public class Utils {
         }
     }
 
-    public void wait(int seconds){
-        try {
-            TimeUnit.SECONDS.sleep(seconds);
-        } catch(InterruptedException e){
-            System.out.println("Error while waiting " + seconds + " sec, Error: " + e.getMessage());
+
+    public static String format(String text, List<Placeholder> placeholders){
+        for(Placeholder placeholder : placeholders){
+            text.replaceAll(placeholder.getPlaceholder(), placeholder.getReplacement());
         }
+        return text;
     }
 }

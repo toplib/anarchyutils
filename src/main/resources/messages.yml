@@ -1,0 +1,19 @@
+system:
+  player_offline: "&cPlayer offline"
+  no_permissions: "&cYou don't have permission to do this!"
+  reload: "&aPlugin reloaded"
+  error: "&cERROR! Please contact with administrator."
+  root_command_usage: "&cUsage: "
+
+
+modules:
+  items:
+    player_setPlast: "&fYou &6%player% &fplaced the &6Plast&f!" # Supports placeholder %player%
+    player_setPlastLog: "&fPlayer &6%player% &fplaced the &6Plast&f on Location: &6X: %location_x% Y: %location_y% Z: %location_z%"
+    player_plastDisable: "&fYour &6Plast&f has been disabled Player &6%player%"
+    player_setTrap: "&fYou &6%player% &fplaced the &6Trap&f!"
+    player_setTrapLog: "&fPlayer &6%player% &fplaced the &6Trap&f on Location: &6X: %location_x% Y: %location_y% Z: %location_z%"
+    player_TrapDisable: "&fYour &6Trap&f has been disabled Player &6%player%"
+    receive_item: "&fYou receive item: &6%item%"
+    cooldown: "&cError please wait before using this item again."
+    itemNotFounded: "&c%item% doesn't exists!"

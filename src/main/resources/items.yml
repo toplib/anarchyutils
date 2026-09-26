@@ -1,0 +1,26 @@
+# ============================================================
+#  AnarchyUtils - custom items
+#  Add as many items as you want! Each item is a key under "Items:".
+#
+#  Supported fields:
+#    DisplayName  - name of the item (supports & colors and &#RRGGBB hex)
+#    Material     - org.bukkit.Material name
+#    Glow         - true/false, shiny enchant glint
+#    Lore         - list of lore lines (supports & colors)
+#    onUse        - list of actions executed on right click
+#
+#  Supported action types (in onUse):
+#    [MESSAGE] text                 -> chat message to player
+#    [ACTIONBAR] text               -> action bar message
+#    [TITLE] title;subtitle;in;stay;out
+#    [SOUND] SOUND_NAME;volume;pitch
+#    [PLAYER_COMMAND] somecommand   -> run command AS the player
+#    [SERVER_COMMAND] give %player% diamond  -> run as console
+#    [CONSOLE] ...                  -> same as SERVER_COMMAND
+#    [WAIT] 0.5                     -> delay in seconds before next action
+#    [CLOSE]                        -> close player's inventory
+#
+#  Placeholders: %player% %world% %x% %y% %z% %health%
+# ============================================================
+
+Items: {}
