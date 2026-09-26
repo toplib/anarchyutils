@@ -1,18 +1,14 @@
 package my.toplib.anarchyutils.action;
 
+import my.toplib.anarchyutils.utils.Utils;
 import org.bukkit.entity.Player;
 
-public class MessageAction implements Action{
-    private final Player player;
+public class MessageAction implements Action {
+
     private final String message;
 
-    public MessageAction(Player player, String message) {
-        this.player = player;
+    public MessageAction(String message) {
         this.message = message;
-    }
-
-    public Player getPlayer() {
-        return player;
     }
 
     public String getMessage() {
@@ -20,7 +16,8 @@ public class MessageAction implements Action{
     }
 
     @Override
-    public void execute() {
-        player.sendMessage(message);
+    public void execute(Player player) {
+        if (player == null) return;
+        player.sendMessage(Utils.color(PlaceholderAPI.apply(player, message)));
     }
 }

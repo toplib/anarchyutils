@@ -1,48 +1,26 @@
-Items:
-  Trap:
-    DisplayName: "&eTrap" # Display name
-    Material: NETHERITE_SCRAP # Material - List of material: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
-    Glow: true
-    Lore:
-      - "&f"
-      - "  &fRarity: §eLegendary  "
-      - "&f"
-      - "  &fDescription:"
-      - "   &fWhen using §7(RCB)§f"
-      - "   &fplaces obsidian box §63x3"
-      - "&f"
-    onUse:
-      - "[PLACESCHEM] trap1;120" # onUse condition
-      - "[WAIT] 0.1"
-      - "[PLACESCHEM] trap2;120"
-      - "[WAIT] 0.1"
-      - "[PLACESCHEM] trap3;120"
-      - "[WAIT] 0.1"
-      - "[PLACESCHEM] trap4;120"
-      - "[WAIT] 0.1"
-      - "[PLACESCHEM] trap5;120"
-      - "[WAIT] 0.1"
+# ============================================================
+#  AnarchyUtils - custom items
+#  Add as many items as you want! Each item is a key under "Items:".
+#
+#  Supported fields:
+#    DisplayName  - name of the item (supports & colors and &#RRGGBB hex)
+#    Material     - org.bukkit.Material name
+#    Glow         - true/false, shiny enchant glint
+#    Lore         - list of lore lines (supports & colors)
+#    onUse        - list of actions executed on right click
+#
+#  Supported action types (in onUse):
+#    [MESSAGE] text                 -> chat message to player
+#    [ACTIONBAR] text               -> action bar message
+#    [TITLE] title;subtitle;in;stay;out
+#    [SOUND] SOUND_NAME;volume;pitch
+#    [PLAYER_COMMAND] somecommand   -> run command AS the player
+#    [SERVER_COMMAND] give %player% diamond  -> run as console
+#    [CONSOLE] ...                  -> same as SERVER_COMMAND
+#    [WAIT] 0.5                     -> delay in seconds before next action
+#    [CLOSE]                        -> close player's inventory
+#
+#  Placeholders: %player% %world% %x% %y% %z% %health%
+# ============================================================
 
-  Plast:
-    DisplayName: "&bPlast"
-    Material: DRIED_KELP
-    Glow: true
-    Lore:
-      - "§f"
-      - "  §fRarity: §bUltra-Rare  "
-      - "§f"
-      - "  §fDescription:"
-      - "   §fWhen using §7(RCB)§f"
-      - "   §fplaces obsidian plast §63x3"
-      - "§f"
-    onUse:
-      - "[PLACESCHEM] plast1;120"
-      - "[WAIT] 0.1"
-      - "[PLACESCHEM] plast2;120"
-      - "[WAIT] 0.1"
-      - "[PLACESCHEM] plast3;120"
-      - "[WAIT] 0.1"
-      - "[PLACESCHEM] plast4;120"
-      - "[WAIT] 0.1"
-      - "[PLACESCHEM] plast5;120"
-      - "[WAIT] 0.1"
+Items: {}

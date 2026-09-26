@@ -1,13 +1,62 @@
-Settings:
-  checkForUpdates: true
 
-Schematics:
-  trap:
-    file: "building/trap.scm"
-  plast:
-    file: "building/plast.scm"
+Items:
+  Trap:
+    Material: NETHERITE_SCRAP
+    DisplayName: "&eTrap"
+    Glow: true
+    Lore:
+      - "&f"
+      - "  &fRarity: &eLegendary"
+      - "&f"
+      - "  &fDescription:"
+      - "   &fWhen using &7(RCB)&f"
+      - "   &fplaces obsidian box &63x3"
+      - "&f"
+    cooldown_seconds: 5
+    despawn_delay: 6000
+    onUse:
+      - "[MESSAGE] &e&lTRAP &7activated at &fX:%x% Y:%y% Z:%z%"
+      - "[SOUND] ENTITY_ENDERMAN_TELEPORT;1.0;1.5"
+      - "[WAIT] 0.1"
+      - "[PLACESCHEM] trap1;120"
+      - "[WAIT] 0.1"
+      - "[PLACESCHEM] trap2;120"
+      - "[WAIT] 0.1"
+      - "[PLACESCHEM] trap3;120"
+      - "[WAIT] 0.1"
+      - "[PLACESCHEM] trap4;120"
+      - "[WAIT] 0.1"
+      - "[PLACESCHEM] trap5;120"
+      - "[WAIT] 0.1"
+
+  Plast:
+    Material: DRIED_KELP
+    DisplayName: "&bPlast"
+    Glow: true
+    Lore:
+      - "&f"
+      - "  &fRarity: &bUltra-Rare"
+      - "&f"
+      - "  &fDescription:"
+      - "   &fWhen using &7(RCB)&f"
+      - "   &fplaces obsidian plast &63x3"
+      - "&f"
+    cooldown_seconds: 5
+    despawn_delay: 6000
+    onUse:
+      - "[TITLE] &b&lPLAST;&7placed by &f%player%;10;60;20"
+      - "[SOUND] BLOCK_ANVIL_USE;1.0;1.0"
+      - "[WAIT] 0.1"
+      - "[PLACESCHEM] plast1;120"
+      - "[WAIT] 0.1"
+      - "[PLACESCHEM] plast2;120"
+      - "[WAIT] 0.1"
+      - "[PLACESCHEM] plast3;120"
+      - "[WAIT] 0.1"
+      - "[PLACESCHEM] plast4;120"
+      - "[WAIT] 0.1"
+      - "[PLACESCHEM] plast5;120"
+      - "[WAIT] 0.1"
 
 DisabledRegions:
   - spawn
-
-

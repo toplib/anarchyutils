@@ -3,16 +3,16 @@ package my.toplib.anarchyutils.action;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-public class ConsoleAction implements Action{
+/**
+ * Runs a command from the console. Alias of ConsoleAction,
+ * kept for clearer config readability: [SERVER_COMMAND] ...
+ */
+public class ServerCommandAction implements Action {
 
     private final String command;
 
-    public ConsoleAction(String command) {
+    public ServerCommandAction(String command) {
         this.command = command;
-    }
-
-    public String getCommand() {
-        return command;
     }
 
     @Override

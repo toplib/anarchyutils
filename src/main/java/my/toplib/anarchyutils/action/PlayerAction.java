@@ -3,17 +3,12 @@ package my.toplib.anarchyutils.action;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-public class PlayerAction implements Action{
-    private final Player player;
+public class PlayerAction implements Action {
+
     private final String command;
 
-    public PlayerAction(Player player, String command) {
-        this.player = player;
+    public PlayerAction(String command) {
         this.command = command;
-    }
-
-    public Player getPlayer() {
-        return player;
     }
 
     public String getCommand() {
@@ -21,7 +16,8 @@ public class PlayerAction implements Action{
     }
 
     @Override
-    public void execute() {
-        Bukkit.getServer().dispatchCommand(player, command);
+    public void execute(Player player) {
+        if (player == null) return;
+        Bukkit.getServer().dispatchCommand(player, PlaceholderAPI.apply(player, command));
     }
 }
