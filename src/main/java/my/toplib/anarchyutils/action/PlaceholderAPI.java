@@ -17,6 +17,15 @@ public final class PlaceholderAPI {
 
     public static String apply(Player player, String text) {
         if (player == null || text == null) return text;
+        // If the real PlaceholderAPI plugin is present, resolve its placeholders first.
+        try {
+            Class<?> papi = Class.forName("me.clip.placeholderapi.PlaceholderAPI");
+            Object result = papi.getMethod("setPlaceholders", org.bukkit.OfflinePlayer.class, String.class)
+                    .invoke(null, player, text);
+            if (result instanceof String) text = (String) result;
+        } catch (Throwable ignored) {
+            // PlaceholderAPI not installed - fall back to built-in placeholders only.
+        }
         text = text.replace("%player%", player.getName());
         text = text.replace("%world%", player.getWorld().getName());
         text = text.replace("%x%", String.valueOf(player.getLocation().getBlockX()));
