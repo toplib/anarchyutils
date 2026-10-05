@@ -17,3 +17,15 @@ modules:
     receive_item: "&fYou receive item: &6%item%"
     cooldown: "&cError please wait before using this item again."
     itemNotFounded: "&c%item% doesn't exists!"
+    noEnoughSpace: "&cNot enough space in your inventory!"
+  chat_filter:
+    blocked: "&cYour message was blocked by the chat filter."
+  combat_log:
+    logout: "&c%player% logged out during combat and was killed!"
+    blocked_command: "&cYou can't use that command in combat!"
+  world_limits:
+    outside: "&cYou can't go further - you reached the world limit!"
+  dupe_detect:
+    alert: "&c[DupeDetect] &f%player% &7dropped %count% items in 60s"
+  anti_cheat:
+    alert: "&c[AntiCheat] &f%player% &7flagged for &f%check% &7(x%count%)"

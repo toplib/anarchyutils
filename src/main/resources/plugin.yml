@@ -1,15 +1,33 @@
 name: AnarchyUtils
 version: '${project.version}'
-description: 'My first plugin :) This plugin adds custom Trap and Plast'
+description: 'Anarchy-server utilities: custom items with action chains, combat log, chat filter, world limits, dupe detection, anti-cheat hooks.'
 main: my.toplib.anarchyutils.AnarchyUtils
-api-version: '1.16'
+api-version: '1.21'
 load: POSTWORLD
 author: TOPLIB
 depend: [WorldGuard]
+softdepend: [PlaceholderAPI]
 commands:
   anarchy_utils:
     description: AnarchyUtils commands.
-    usage: "Usage: /anarchy_utils <give/reload/info> <Trap | Plast> <Player>"
+    usage: "Usage: /anarchy_utils <give/reload/info> <item> <Player> [amount]"
     aliases:
       - au
       - autils
+permissions:
+  anarchyutils.reload:
+    default: op
+  anarchyutils.giveCMD:
+    default: op
+  anarchyutils.updateCheck:
+    default: op
+  anarchyutils.alerts:
+    default: op
+  anarchyutils.chatfilter.bypass:
+    default: op
+  anarchyutils.combatlog.bypass:
+    default: false
+  anarchyutils.worldlimits.bypass:
+    default: op
+  anarchyutils.anticheat.bypass:
+    default: op

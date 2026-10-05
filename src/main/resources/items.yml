@@ -3,13 +3,19 @@
 #  Add as many items as you want! Each item is a key under "Items:".
 #
 #  Supported fields:
-#    DisplayName  - name of the item (supports & colors and &#RRGGBB hex)
-#    Material     - org.bukkit.Material name
-#    Glow         - true/false, shiny enchant glint
-#    Lore         - list of lore lines (supports & colors)
-#    onUse        - list of actions executed on right click
+#    DisplayName     - name of the item (supports & colors and &#RRGGBB hex)
+#    Material        - org.bukkit.Material name
+#    Glow            - true/false, enchant glint
+#    Lore            - list of lore lines (supports & colors)
+#    CustomModelData - integer, for resource-pack models (optional)
+#    Enchantments    - list of "ENCHANT;level" entries (optional)
+#    cooldown_seconds- per-player cooldown before the item can be used again
+#    consume         - consume one of the stack on use (default true)
+#    despawn_delay   - ticks until placed structures revert (Trap/Plast)
+#    onUse           - list of actions executed on right click
+#    onConsume       - list of actions executed when the item is eaten/drunk
 #
-#  Supported action types (in onUse):
+#  Supported action types (in onUse / onConsume):
 #    [MESSAGE] text                 -> chat message to player
 #    [ACTIONBAR] text               -> action bar message
 #    [TITLE] title;subtitle;in;stay;out
@@ -17,8 +23,20 @@
 #    [PLAYER_COMMAND] somecommand   -> run command AS the player
 #    [SERVER_COMMAND] give %player% diamond  -> run as console
 #    [CONSOLE] ...                  -> same as SERVER_COMMAND
+#    [BROADCAST] text               -> message to the whole server
+#    [TELEPORT] x;y;z[;world[;yaw;pitch]]     ("~" keeps current coord, "~N" offsets)
+#    [POTION] EFFECT;seconds;amplifier
+#    [GIVEITEM] customItemIdOrMATERIAL;amount
+#    [PLACESCHEM] name[;revertSec]  -> paste plugins/AnarchyUtils/schematics/name.yml
 #    [WAIT] 0.5                     -> delay in seconds before next action
 #    [CLOSE]                        -> close player's inventory
+#
+#  Conditional chains:
+#    [IF] permission:node | item:MATERIAL | customitem:id | world:name |
+#         health:>10 | sneaking | op        (prefix with ! to negate)
+#    [ELSE]
+#    [ENDIF]
+#    Actions between a failed [IF] and [ELSE]/[ENDIF] are skipped.
 #
 #  Placeholders: %player% %world% %x% %y% %z% %health%
 # ============================================================
