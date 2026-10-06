@@ -16,7 +16,15 @@ public enum ActionType {
     PLAYER_COMMAND,
     SERVER_COMMAND,
     WAIT,
-    CLOSE;
+    CLOSE,
+    TELEPORT,
+    POTION,
+    GIVEITEM,
+    BROADCAST,
+    IF,
+    ELSE,
+    ENDIF,
+    PLACESCHEM;
 
     /**
      * Parses a raw config string like "[MESSAGE] hello" into an Action.
@@ -74,6 +82,48 @@ public enum ActionType {
                 return new WaitAction(parseDouble(args, 0));
             case CLOSE:
                 return new CloseInventoryAction();
+            case TELEPORT: {
+                // [TELEPORT] x;y;z[;world[;yaw;pitch]]  ("~" = keep current)
+                String[] parts = args.split(";", -1);
+                if (parts.length < 3) return null;
+                String world = parts.length > 3 ? parts[3].trim() : null;
+                Float yaw = parts.length > 4 ? parseFloatOrNull(parts[4]) : null;
+                Float pitch = parts.length > 5 ? parseFloatOrNull(parts[5]) : null;
+                return new TeleportAction(parts[0], parts[1], parts[2], world, yaw, pitch);
+            }
+            case POTION: {
+                // [POTION] EFFECT_NAME;seconds;amplifier
+                String[] parts = args.split(";", -1);
+                String effect = parts.length > 0 ? parts[0].trim() : "";
+                if (effect.isEmpty()) return null;
+                double seconds = parseDouble(parts.length > 1 ? parts[1] : null, 30);
+                int amplifier = parseInt(parts.length > 2 ? parts[2] : null, 0);
+                return new PotionEffectAction(effect, seconds, amplifier);
+            }
+            case GIVEITEM: {
+                // [GIVEITEM] itemKeyOrMaterial;amount
+                String[] parts = args.split(";", -1);
+                String item = parts.length > 0 ? parts[0].trim() : "";
+                if (item.isEmpty()) return null;
+                int amount = parseInt(parts.length > 1 ? parts[1] : null, 1);
+                return new GiveItemAction(item, amount);
+            }
+            case BROADCAST:
+                return new BroadcastAction(args);
+            case IF:
+                return new IfAction(args);
+            case ELSE:
+                return new FlowAction(FlowAction.Kind.ELSE);
+            case ENDIF:
+                return new FlowAction(FlowAction.Kind.ENDIF);
+            case PLACESCHEM: {
+                // [PLACESCHEM] name[;revertAfterSeconds]
+                String[] parts = args.split(";", -1);
+                String name = parts.length > 0 ? parts[0].trim() : "";
+                if (name.isEmpty()) return null;
+                int revert = parseInt(parts.length > 1 ? parts[1] : null, 0);
+                return new PlaceSchematicAction(name, revert);
+            }
             default:
                 return null;
         }
@@ -94,6 +144,15 @@ public enum ActionType {
             return Float.parseFloat(s.trim());
         } catch (NumberFormatException e) {
             return def;
+        }
+    }
+
+    private static Float parseFloatOrNull(String s) {
+        if (s == null || s.isEmpty()) return null;
+        try {
+            return Float.parseFloat(s.trim());
+        } catch (NumberFormatException e) {
+            return null;
         }
     }
 

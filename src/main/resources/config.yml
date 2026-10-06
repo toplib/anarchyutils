@@ -1,3 +1,51 @@
+# ============================================================
+#  AnarchyUtils - main configuration
+# ============================================================
+
+Settings:
+  checkForUpdates: true
+
+# Toggleable server modules. Each runs only when enabled: true.
+Modules:
+
+  # Blocks or censors chat messages. Bypass: anarchyutils.chatfilter.bypass
+  chat_filter:
+    enabled: false
+    mode: censor            # censor | cancel
+    blocked_words:
+      - "badword"
+    blocked_regex: []
+
+  # Kill players who disconnect while in combat. Bypass: anarchyutils.combatlog.bypass
+  combat_log:
+    enabled: false
+    tag_seconds: 15
+    block_commands: true
+    blocked_commands:
+      - tpa
+      - spawn
+      - home
+      - warp
+
+  # Keeps players inside a square world border. Bypass: anarchyutils.worldlimits.bypass
+  world_limits:
+    enabled: false
+    radius: 5000
+    center_x: 0
+    center_z: 0
+
+  # Alerts staff when a player drops items suspiciously fast.
+  dupe_detect:
+    enabled: false
+    max_drops_per_minute: 120
+    cancel_excess: true
+
+  # Basic fly-check hooks. Fires AntiCheatViolationEvent for other plugins.
+  # Bypass: anarchyutils.anticheat.bypass
+  anti_cheat:
+    enabled: false
+    max_air_ticks: 80
+    setback: true
 
 Items:
   Trap:
@@ -12,6 +60,7 @@ Items:
       - "   &fWhen using &7(RCB)&f"
       - "   &fplaces obsidian box &63x3"
       - "&f"
+    consume: true
     cooldown_seconds: 5
     despawn_delay: 6000
     onUse:
@@ -41,6 +90,7 @@ Items:
       - "   &fWhen using &7(RCB)&f"
       - "   &fplaces obsidian plast &63x3"
       - "&f"
+    consume: true
     cooldown_seconds: 5
     despawn_delay: 6000
     onUse:
