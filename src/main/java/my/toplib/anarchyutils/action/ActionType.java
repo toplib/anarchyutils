@@ -16,7 +16,8 @@ public enum ActionType {
     PLAYER_COMMAND,
     SERVER_COMMAND,
     WAIT,
-    CLOSE;
+    CLOSE,
+    PLACESCHEM;
 
     /**
      * Parses a raw config string like "[MESSAGE] hello" into an Action.
@@ -74,6 +75,13 @@ public enum ActionType {
                 return new WaitAction(parseDouble(args, 0));
             case CLOSE:
                 return new CloseInventoryAction();
+            case PLACESCHEM: {
+                // [PLACESCHEM] schemName;despawnDelaySeconds (; part is optional)
+                String[] parts = args.split(";", -1);
+                String name = parts.length > 0 ? parts[0] : "";
+                long despawnSecs = (long) parseDouble(parts.length > 1 ? parts[1] : null, 6.0);
+                return new PlaceSchemAction(name, despawnSecs);
+            }
             default:
                 return null;
         }

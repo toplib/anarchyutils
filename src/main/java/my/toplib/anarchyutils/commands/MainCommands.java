@@ -24,12 +24,11 @@ public class MainCommands implements CommandExecutor {
             case "reload":
                 if(sender.hasPermission("anarchyutils.reload")){
                     ItemManager.reload();
-                    AnarchyUtils.reloadConfigs();
 
-                    sender.sendMessage(Utils.color(messages.getConfig().getString("reload")));
+                    sender.sendMessage(Utils.color(messages.getConfig().getString("system.reload", "&aPlugin reloaded")));
                     return true;
                 } else {
-                    sender.sendMessage(Utils.color(messages.getConfig().getString("no_permissions")));
+                    sender.sendMessage(Utils.color(messages.getConfig().getString("system.no_permissions")));
                     return true;
                 }
             case "info":
@@ -41,33 +40,33 @@ public class MainCommands implements CommandExecutor {
                         return false;
                     } else if(args.length == 2) {
                         if (!ItemManager.containsItem(args[1].toLowerCase())) {
-                            sender.sendMessage(Utils.color(messages.getConfig().getString("itemNotFounded").replaceAll("%item%", args[1].toLowerCase())));
+                            sender.sendMessage(Utils.color(messages.getConfig().getString("modules.items.item_not_found", "&cmodules.items.item_not_found").replaceAll("%item%", args[1].toLowerCase())));
                             return true;
                         }
                     } else if (args.length == 3) {
                         Player p = Bukkit.getPlayer(args[2]);
                         if (p == null){
-                            sender.sendMessage(Utils.color(messages.getConfig().getString("player_offline")));
+                            sender.sendMessage(Utils.color(messages.getConfig().getString("system.player_offline", "&csystem.player_offline")));
                             return true;
                         }
                         if (!ItemManager.containsItem(args[1].toLowerCase())) {
-                            p.sendMessage(Utils.color(messages.getConfig().getString("itemNotFounded").replaceAll("%item%", args[1].toLowerCase())));
+                            p.sendMessage(Utils.color(messages.getConfig().getString("modules.items.item_not_found", "&cmodules.items.item_not_found").replaceAll("%item%", args[1].toLowerCase())));
                             return true;
                         }
                         switch (ItemManager.giveItemToPlayer(p, args[1].toLowerCase(), 1)){
                             case "success":
-                                p.sendMessage(Utils.color(messages.getConfig().getString("receive_item").replaceAll("%item%", ItemManager.getItem(args[1].toLowerCase()).getItemMeta().getDisplayName())));
+                                p.sendMessage(Utils.color(messages.getConfig().getString("modules.items.receive_item", "&cmodules.items.receive_item").replaceAll("%item%", ItemManager.getItem(args[1].toLowerCase()).getItemMeta().getDisplayName())));
                                 return true;
                             case "error":
-                                p.sendMessage(Utils.color(messages.getConfig().getString("noEnoughSpace")));
+                                p.sendMessage(Utils.color(messages.getConfig().getString("system.no_enough_space", "&csystem.no_enough_space")));
                                 return true;
                             default:
-                                p.sendMessage(Utils.color(messages.getConfig().getString("error")));
+                                p.sendMessage(Utils.color(messages.getConfig().getString("system.error", "&csystem.error")));
                                 return true;
                         }
                     }
                 } else {
-                    sender.sendMessage(Utils.color(messages.getConfig().getString("no_permissions")));
+                    sender.sendMessage(Utils.color(messages.getConfig().getString("system.no_permissions", "&csystem.no_permissions")));
                     return true;
                 }
             default:

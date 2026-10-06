@@ -48,10 +48,11 @@ public class ActionManager {
 
         if (action instanceof WaitAction) {
             long delayTicks = Math.round(((WaitAction) action).getSeconds() * 1000.0 / TICK);
+            final int nextIndex = index + 1;
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    run(player, actions, index + 1);
+                    ActionManager.run(player, actions, nextIndex);
                 }
             }.runTaskLater(AnarchyUtils.instance, Math.max(1, delayTicks));
             return;

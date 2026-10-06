@@ -83,6 +83,7 @@ public class ItemManager {
 
     public static void reload() {
         clearItems();
+        AnarchyUtils.reloadConfigs();
         loadFromConfig();
     }
 
@@ -91,7 +92,14 @@ public class ItemManager {
      * Each item supports: DisplayName, Material, Glow, Lore, onUse actions.
      */
     private static void loadFromConfig() {
-        for (String key : AnarchyUtils.itemsConfig.getConfig().getConfigurationSection("Items").getKeys(false)) {
+        org.bukkit.configuration.ConfigurationSection section =
+                AnarchyUtils.itemsConfig.getConfig().getConfigurationSection("Items");
+        if (section == null) {
+            AnarchyUtils.instance.getLogger().warning(
+                    "AnarchyUtils | items.yml has no 'Items' section, no items loaded.");
+            return;
+        }
+        for (String key : section.getKeys(false)) {
             createItem(key);
         }
     }
@@ -139,7 +147,8 @@ public class ItemManager {
         meta.setLore(lore);
 
         if (AnarchyUtils.itemsConfig.getConfig().getBoolean(base + "Glow", false)) {
-            meta.addItemFlags(org.bukkit.inventory.ItemFlag.HIDE_ENCHANTS, org.bukkit.inventory.ItemFlag.ENCHANT_GLINT);
+            meta.addItemFlags(org.bukkit.inventory.ItemFlag.HIDE_ENCHANTS);
+            meta.addEnchant(org.bukkit.enchantments.Enchantment.DURABILITY, 1, true);
         }
 
         item.setItemMeta(meta);
